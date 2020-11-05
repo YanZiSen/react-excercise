@@ -1,0 +1,14 @@
+.loginWarpper{
+    position: relative;
+    height: 100vh;
+    padding-top: 10vh;
+}
+
+.loginBox{
+    width: 800px;
+    margin: auto;
+}
+
+.loginBox :global(.ant-btn) {
+    width: 100%;
+}
