@@ -1,10 +1,17 @@
 import {renderRoutes, MainRoutes} from './routers'
-function App() {
+import {connect} from 'react-redux'
+function App({user}) {
   return (
     <div className="App">
-      {renderRoutes(MainRoutes)}
+      {renderRoutes(MainRoutes, user.role)}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(App);

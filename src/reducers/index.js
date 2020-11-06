@@ -2,7 +2,10 @@ import {combineReducers} from 'redux'
 import {SET_USER, REQUEST_POSTS, RECIEVE_POSTS, SELECT_SUBREDIT, INVALIDATE_SUBREDIT} from '../actions'
 
 let initialState = {
-    user: {},
+    user: {
+        userName: '',
+        role: 1
+    },
     selectedSubEdit: 'reactjs'
 }
 

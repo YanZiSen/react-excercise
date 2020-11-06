@@ -1,12 +1,13 @@
 import {Layout} from 'antd'
 import React from 'react'
 import SliderMenu from './SliderMenu'
+import {connect} from 'react-redux'
 import store from '../../store'
 
 import {renderRoutes, SecondRoutes} from '../../routers'
 const {Header, Content, Footer} = Layout
-const Index = () => {
-    let {userName = '暂无'} = store.getState().user
+const Index = ({user}) => {
+    let {userName = '暂无'} = user
     return (
         <Layout>
             <Header style={{height:"48px",lineHeight:'48px', color: '#fff'}}>
@@ -16,7 +17,7 @@ const Index = () => {
                 <SliderMenu></SliderMenu>
                 <Layout>
                     <Content style={{height:'calc(100vh - 96px)'}}>
-                        {renderRoutes(SecondRoutes)}
+                        {renderRoutes(SecondRoutes, user.role)}
                     </Content>
                     <Footer style={{height:'48px', padding: '0 20px', borderTop: '1px solid #ddd', lineHeight: '48px'}}>
                         ...XXXX出品
@@ -27,4 +28,10 @@ const Index = () => {
     )
 }
 
-export default Index
+const mapStateToProps = (state) => {
+    return {
+        user:state.user
+    }
+}
+
+export default connect(mapStateToProps)(Index)

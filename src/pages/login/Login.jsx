@@ -19,29 +19,22 @@ const tailLayout = {
         span: 16
     }
 }
-
-
-
 const Login = (props) => {
-    const onFinish = (values) => {
-        console.log('Success', values)
-    }
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    }
-    const Login = () => {
+    const onFinish = ({username, password}) => {
         setTimeout(() => {
             store.dispatch(setUser({
-                userName: 'Bob',
-                role: '1'
+                userName: username,
+                role: username === 'admin' ? 3 : 2
             }))
             props.history.replace('/backend/table');
         }, 1000)
     }
-    console.log(props)
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    }
     return (
         <div className={styles.loginWarpper}>
-            <div className={`${styles.loginBox} loginBox`}>
+            <div className={`${styles.loginBox}`}>
                 <Form {...layout} name="basic" initialValues = {{
                         remember: true
                     }}
@@ -59,11 +52,11 @@ const Login = (props) => {
                     }>
                         <Input.Password/>
                     </Form.Item>
-                    <Form.Item {...tailLayout} name="记住我" valuePropName="checked">
+                    <Form.Item {...tailLayout} name="remember" valuePropName="checked">
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" htmlType="submit" onClick={Login}>
+                        <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>

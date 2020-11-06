@@ -76,10 +76,12 @@ export const NavConfigList = SecondRoutes.map(item => {
     })
 })
 
-export const renderRoutes = (routes) => {
+export const renderRoutes = (routes, role) => {
     return(
         <Switch>
-            {routes.map((route, idx) => {
+            {routes.filter(
+                route => !route.permission || route.permission.indexOf(role) > -1
+            ).map((route, idx) => {
                 return (
                     <Route path={route.path} exact={route.exact} key={route.key ||idx} render={
                         (props) => <route.component {...props} {...route.meta} route={route}/>
